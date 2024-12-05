@@ -1,0 +1,41 @@
+Kwazy Enigma OwO Machine / KEOwO
+created by : XR_XharpRazor
+department : Memo2007Ultra - Learn2016 - Academic2017 - Science2017 - ComputerScience2021
+
+Commands :
+
+-------- Setting up the Machine
+
+chQty               : set the number of charracters, WARNING : you have to set up your Keyboard, LampBoard, Rotors, PlugBoards based on the number of charracters
+
+KL.sK               : set the set of characters of the plaintext
+KL.sL               : set the set of characters of the ciphertext
+Rx.sR.v             : x is 1 to 4, v is 'm' or 'r', set the wiring of the 'x'th rotor by using version 'v' where the wiring is 'm : a coma separated integer list from 0 to chQty entered manually' or 'r : randomly generated'
+Rx.sK               : x is 1 to 4, set the ring setting / ring offset of the 'x'th rotor
+Px.sR.v             : x is 1 or 2, v is 'm' or 'r', set the connections of the 'x'th plugboard by using version 'v' where the connections 'm : is a coma separated integer list from 0 to chQty entered manually' or 'r : randomly connected'
+
+Rx.r                : x is 1 to 4, rotate the 'x'th rotor
+RA.sP               : set the positions of all Rotors
+
+-------- Using the machine
+
+KL.p                : print the content of the Keyboard and the LampBoard
+Rx.p                : x is 1 to 4, print the wirings of the 'x'th Rotor
+RA.p                : print the wirings and the current position of all the Rotors
+Px.p                : x is 1 or 2, print the connection of the 'x'th plugboard
+
+key.print           : print the content of the Keyboard, Lampboard, Pugboards and Rotors
+key.gen.swap        : generate a shuffled int array by using the swaping method
+key.gen.created     : generate a shuffled int array by using the card method
+
+enc.c               : start encryption, characters by characters, when done, type 'done'
+enc.s               : start encryption, enter the entire string of plaintext
+dec.c               : start decryption, characters by characters, when done, type 'done'
+dec.s               : start decryption, enter the entire string of ciphertext
+
+-------- other Commands
+
+clear               : clear the screen
+exit                : close KEOwO machine
+ld.64               : print some premade 64int arrays
+ld.ch               : print some premade sets of charracters

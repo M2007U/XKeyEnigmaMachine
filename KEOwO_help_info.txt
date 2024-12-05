@@ -1,0 +1,101 @@
+Kwazy Enigma OwO Machine / KEOwO
+created by : XR_XharpRazor
+department : Memo2007Ultra - Learn2016 - Academic2017 - Science2017 - ComputerScience2021
+
+
+
+
+-------- the Original Machine
+
+The original Enigma Machine is designed by a German Engineer Arthur Scherbius
+The original purpose of the Machine is meant for banks to encrypt/decrypt messages etc.
+
+On the Original machine, they only have a Keyboard, 3 Rotors, 1 Reflector, 1 Lampboard.
+Assume we have the diagram below :
+
+| Keyboard  | -> |         | -> |         | -> |         | -> |           |
+|           |    | Rotor 1 |    | Rotor 2 |    | Rotor 3 |    | Reflector |
+| LampBoard | <- |         | <- |         | <- |         | <- |           |
+
+When a key is pressed on the Keyboard, 
+the signal goes through the 1st rotor, 2nd rotor, 3rd rotor, 
+then the reflector, and the reflector will send the signal back to the rotors, 
+then to the lampBoard, lighting up the encrypted/decrypted result.
+
+A single rotor has 3 parts : Left Side, Middle Blob, Right Side.
+Both the Left side and Right side has 26 studs,
+the Middle Blob is a total of 26 wires, criss crossing connecting the LeftSide and the RightSide.
+Each rotor has different wires connections. 
+
+Every time when a key is pressed the rotor will turn, 
+this means that for every character, 
+the pairing of the plaintext character and ciphertext character will be different.
+
+i.e. : if you keep pressing AAAAAA......, what you will get is not the same letter, instead it will come out as a pseudo random mess.
+
+note : all rotors can be taken out and rearranged,
+note : each rotor can have 26 rotation position,
+note : when the 1st rotor done a full rotation, it will kick the 2nd rotor, when the 2nd rotor done a full rotation, it will kick the 3rd rotor.
+
+
+
+
+-------- WWII : the Nazi saw it
+
+During WWII, the Nazi saw the machine and the machine is a perfect fit for message encryption.
+But the Nazi decided to beef up the machine to military grade
+
+
+
+
+-------- WWII : Plugboard
+
+| Keyboard  | -> |           | -> |         | -> |         | -> |         | -> |           |
+|           |    | Plugboard |    | Rotor 1 |    | Rotor 2 |    | Rotor 3 |    | Reflector |
+| LampBoard | -> |           | <- |         | <- |         | <- |         | <- |           |
+
+the plugboard is a board with 26 sockets and 10 wires, each wire has 2 plugs.
+in this case you can make 10 pairs from the 26 letters
+when the signal goes through the Plugboard, if the letter has a pair, it becomes the new letter, else it stays itself.
+
+
+
+
+-------- WWII : Rotors
+
+sometimes a set of Enigma machine during WWII, 
+it consists of 5 rotors (I, II, III, IV, V), or 8 (I, II, III, IV, V, VI, VII, VIII) 
+to choose 3 from, sometimes a single machine can accept 4 rotors
+
+
+
+
+-------- the critical FLAW
+
+since the machine is just making 13 pairs from 26 letter for every character, a character is guaranteed to be encrypted to another letter.
+i.e. a character can never be encrypted to itself.
+with this, a enigma machine ciphertext can be cracked by using "known-plaintext attack"
+
+
+
+
+-------- type-x
+
+the British saw the machine, and decided to beef up the machine
+such that sometimes a letter can be encrypted to itself,
+and they call it the type-x machine
+
+
+
+
+-------- heh heh heh OwO
+
+in 2014, XR_XharpRazor watched the Enigma machine video from Numberphile, attempted to make a new encryption mechanism
+in 2017, the first version of the 64KE machine is online on the M2007U website
+in 2018, the second version is online
+in 2020, the third version is online
+
+encryption : Keyboard -> Plugboard 1 -> Rotor 4 -> Rotor 3 -> Rotor 2 -> Rotor 1 -> Plugboard 2 -> Lampboard
+decryption : Keyboard <- Plugboard 1 <- Rotor 4 <- Rotor 3 <- Rotor 2 <- Rotor 1 <- Plugboard 2 <- Lampboard
+
+in the Family of KE Machines, all rotors can have their wires configured, all plugboards can have a maximum of letterQty/2 pairs
