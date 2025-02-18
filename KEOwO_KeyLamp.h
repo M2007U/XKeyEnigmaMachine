@@ -10,11 +10,13 @@
 #include <cstring>
 #include <cctype>
 
-#include "FOwOFunctions_CPP-package_2024.h"
+#include "FOwOFunctions_2024.cpp"
 
 class KEOwO_KeyLamp
 {
     public:
+
+    FOwO fowo;
 
     int CharracterQty = 64;
     vector<char> KSide; //Keyboard Vector
@@ -77,7 +79,7 @@ class KEOwO_KeyLamp
     void SetKSide (string Blob, char SeparateChar)
     {
         //Blob is going to be a comma separeted list
-        if(FOwO_string_isNaughtyEmpty(Blob))
+        if(fowo.strOwOng.dOwOtect.isNaughtyEmpty(Blob))
         {
             cout << "KEOwO_KeyLamp : " + KeyLampName + " : SetKSide : List contains white space, will not procede" << endl; 
         }
@@ -85,7 +87,7 @@ class KEOwO_KeyLamp
         {
             //"1,2,3,4,5,6,7,8"
             //turn given string from User into a vector of strings
-            vector<string> KSideList = FOwO_string_SeparateByChar(Blob,SeparateChar);
+            vector<string> KSideList = fowo.strOwOng.mOwOnip.SeparateByChar(Blob,SeparateChar);
 
             //check if size of vector is the same as CharracterQty
             if(KSideList.size() != CharracterQty)
@@ -111,7 +113,7 @@ class KEOwO_KeyLamp
     void SetLSide (string Blob, char SeparateChar)
     {
         //Blob is going to be a comma separeted list
-        if(FOwO_string_isNaughtyEmpty(Blob))
+        if(fowo.strOwOng.dOwOtect.isNaughtyEmpty(Blob))
         {
             cout << "KEOwO_KeyLamp : " + KeyLampName + " : SetLSide : List contains white space, will not procede" << endl; 
         }
@@ -119,7 +121,7 @@ class KEOwO_KeyLamp
         {
             //"1,2,3,4,5,6,7,8"
             //turn given string from User into a vector of strings
-            vector<string> LSideList = FOwO_string_SeparateByChar(Blob,SeparateChar);
+            vector<string> LSideList = fowo.strOwOng.mOwOnip.SeparateByChar(Blob,SeparateChar);
 
             //check if size of vector is the same as CharracterQty
             if(LSideList.size() != CharracterQty)

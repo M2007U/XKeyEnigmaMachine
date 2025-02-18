@@ -15,7 +15,7 @@ department : Memo2007Ultra - Learn2016 - Academic2017 - Science2017 - ComputerSc
 #include <cctype>
 #include <random>
 
-#include "FOwOFunctions_CPP-package_2024.h"
+#include "FOwOFunctions_2024.cpp"
 
 #include "KEOwO_Rotor.h"
 #include "KEOwO_PlugBoard.h"
@@ -82,16 +82,16 @@ int main ()
     (
         64,
         "K1",
-        "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z _ . , ? ! ` \" : 0 1 2 3 4 5 6 7 8 9 ( ) [ ] { } ~ + - * / % ^ & | = < > x y",
-        "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z _ . , ? ! ` \" : 0 1 2 3 4 5 6 7 8 9 ( ) [ ] { } ~ + - * / % ^ & | = < > x y",
+        "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 , .",
+        "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 , .",
         ' '
     );
-    KEOwO_Plugboard P1 = KEOwO_Plugboard(64,"P1");
-    KEOwO_Rotor R1 = KEOwO_Rotor(64,"R1");
-    KEOwO_Rotor R2 = KEOwO_Rotor(64,"R2");
-    KEOwO_Rotor R3 = KEOwO_Rotor(64,"R3");
-    KEOwO_Rotor R4 = KEOwO_Rotor(64,"R4");
-    KEOwO_Plugboard P2 = KEOwO_Plugboard(64,"P1");
+    KEOwO_Plugboard P1 (64,"P1");
+    KEOwO_Rotor R1 (64,"R1");
+    KEOwO_Rotor R2 (64,"R2");
+    KEOwO_Rotor R3 (64,"R3");
+    KEOwO_Rotor R4 (64,"R4");
+    KEOwO_Plugboard P2 (64,"P1");
 
 
     
@@ -101,22 +101,28 @@ int main ()
     int N1,N2,N3,N4,N5,N6,N7;
     int R1pos, R2pos, R3pos, R4pos;
 
+    FOwO fowo;
+
     string UserCommand = "";
     cout << "type \"help\" to get all the commands" << endl;
     cout << "\033[34m" << ">" << "\033[0m";
 
     while(UserCommand != "exit")
     {
+        cout << fowo.strOwOng.shOwOrthand.ColorText("b") << ">";
         getline(cin,UserCommand);
+        cout << fowo.strOwOng.shOwOrthand.ColorText("d");
 
         if (UserCommand != "exit")
         {
 
             if (UserCommand == "help")
             {
+                cout << fowo.strOwOng.shOwOrthand.ColorText("g");
                 cout << "start with typing the command :" << endl;
                 cout << "h.m   : open the operating manual" << endl;
                 cout << "h.i   : printing the concept hand book" << endl;
+                cout << fowo.strOwOng.shOwOrthand.ColorText("d");
             }
             if (UserCommand == "h.m")
             {
@@ -125,14 +131,16 @@ int main ()
 
                 if(!OwOreader)
                 {
-                    cout << "QAQKE : failed to open manual, please reinstall the zip file" << endl;
+                    cout << fowo.cOwOut.ConsoleQuick("error","failed to open manual, please reinstall the zip file") << endl;
                 }
                 else
                 {
                     string stringBox = "";
                     while(getline(OwOreader,stringBox))
                     {
+                        cout << fowo.strOwOng.shOwOrthand.ColorText("g");
                         cout << stringBox << endl;
+                        cout << fowo.strOwOng.shOwOrthand.ColorText("d");
                     }
                 }
 
@@ -145,14 +153,16 @@ int main ()
 
                 if(!OwOreader)
                 {
-                    cout << "QAQKE : failed to open manual, please reinstall the zip file" << endl;
+                    cout << fowo.cOwOut.ConsoleQuick("error","failed to open manual, please reinstall the zip file") << endl;
                 }
                 else
                 {
                     string stringBox = "";
                     while(getline(OwOreader,stringBox))
                     {
+                        cout << fowo.strOwOng.shOwOrthand.ColorText("g");
                         cout << stringBox << endl;
+                        cout << fowo.strOwOng.shOwOrthand.ColorText("d");
                     }
                 }
 
@@ -162,26 +172,26 @@ int main ()
             {
                 int UserInput;
 
-                cout << "insert Character Quantity : ";
+                cout << fowo.cOwOut.ConsoleQuick("prompt","insert Character Quantity : ") ;
                 cin >> UserInput;
 
-                R1 = KEOwO_Rotor(UserInput,"R1");
-                R2 = KEOwO_Rotor(UserInput,"R1");
-                R3 = KEOwO_Rotor(UserInput,"R1");
-                R4 = KEOwO_Rotor(UserInput,"R1");
+                R1.ChangeCharracterQty(UserInput);
+                R2.ChangeCharracterQty(UserInput);
+                R3.ChangeCharracterQty(UserInput);
+                R4.ChangeCharracterQty(UserInput);
 
-                P1 = KEOwO_Plugboard(UserInput, "P1");
-                P2 = KEOwO_Plugboard(UserInput, "P2");
+                P1.ChangeCharracterQty(UserInput);
+                P2.ChangeCharracterQty(UserInput);
 
                 KL.CharracterQty = UserInput;
             }
             else if (UserCommand == "KL.sK")
             {
-                cout << "insert content : "; 
+                cout << fowo.cOwOut.ConsoleQuick("prompt","insert content : ") ; 
                 string KSideList; 
                 getline(cin,KSideList);
                 
-                cout << "insert separation charracter"; 
+                cout << fowo.cOwOut.ConsoleQuick("prompt","insert separation charracter"); 
                 string SepaChar;
                 getline(cin,SepaChar);
 
@@ -192,11 +202,11 @@ int main ()
             }
             else if (UserCommand == "KL.sL")
             {
-                cout << "insert content : "; 
+                cout << fowo.cOwOut.ConsoleQuick("prompt","insert content : "); 
                 string LSideList; 
                 getline(cin,LSideList);
                 
-                cout << "insert separation charracter"; 
+                cout << fowo.cOwOut.ConsoleQuick("prompt","insert separation charracter"); 
                 string SepaChar;
                 getline(cin,SepaChar);
 
@@ -205,283 +215,152 @@ int main ()
                     KL.SetLSide(LSideList,SepaChar.at(0));
                 }
             }
-            else if (UserCommand == "R1.sR.m")
+            else if (fowo.vectOwOr.FindObjPos({"R1.sR.m","R2.sR.m","R3.sR.m","R4.sR.m"},UserCommand,'l') > -1 )
             {
-                cout << "insert content : "; 
+                cout << fowo.cOwOut.ConsoleQuick("prompt","insert content : "); 
                 string RSideList; 
                 getline(cin,RSideList);
                 
-                cout << "insert separation charracter"; 
+                cout << fowo.cOwOut.ConsoleQuick("prompt","insert separation charracter"); 
                 string SepaChar;
                 getline(cin,SepaChar);
 
                 if (RSideList.length() > 0 && SepaChar.length() > 0)
                 {
-                    R1.SetRSide(RSideList,SepaChar.at(0));
+                    if      (UserCommand == "R1.sR.m"){ R1.SetRSide(RSideList,SepaChar.at(0)); }
+                    else if (UserCommand == "R2.sR.m"){ R2.SetRSide(RSideList,SepaChar.at(0)); }
+                    else if (UserCommand == "R3.sR.m"){ R3.SetRSide(RSideList,SepaChar.at(0)); }
+                    else if (UserCommand == "R4.sR.m"){ R4.SetRSide(RSideList,SepaChar.at(0)); }
+                }
+                
+            }
+            else if (fowo.vectOwOr.FindObjPos({"R1.sR.r","R2.sR.r","R3.sR.r","R4.sR.r"},UserCommand,'l') > -1 )
+            {
+                cout << fowo.cOwOut.ConsoleQuick("prompt","choose a mode : \"card\" / \"swap\"") << endl;
+                string UserInput = "";
+                getline(cin,UserInput);
+
+                int TempCharracterQty = 0;
+
+                if      (UserCommand == "R1.sR.r"){TempCharracterQty = R1.CharracterQty;}
+                else if (UserCommand == "R2.sR.r"){TempCharracterQty = R2.CharracterQty;}
+                else if (UserCommand == "R3.sR.r"){TempCharracterQty = R3.CharracterQty;}
+                else if (UserCommand == "R4.sR.r"){TempCharracterQty = R4.CharracterQty;}
+
+                vector<int> VekInt = {};
+                bool SafeToContinue = false;
+                if (UserInput == "card" || UserInput == "c")
+                {
+                    VekInt = OwOKEUtil_key_gen_card(TempCharracterQty);
+                    SafeToContinue = true;
+                }
+                else if (UserInput == "swap" || UserInput == "s")
+                {
+                    VekInt = OwOKEUtil_key_gen_swap(TempCharracterQty);
+                    SafeToContinue = true;
+                }
+                else
+                {
+                    cout << fowo.cOwOut.ConsoleQuick("error","invalid choice") << endl;
+                    SafeToContinue = false;
+                }
+
+                if (SafeToContinue)
+                {
+                    if      (UserCommand == "R1.sR.r"){R1.RSide = VekInt;}
+                    else if (UserCommand == "R2.sR.r"){R2.RSide = VekInt;}
+                    else if (UserCommand == "R3.sR.r"){R3.RSide = VekInt;}
+                    else if (UserCommand == "R4.sR.r"){R4.RSide = VekInt;}
                 }
             }
-            else if (UserCommand == "R2.sR.m")
+            else if (fowo.vectOwOr.FindObjPos({"R1.sK","R2.sK","R3.sK","R4.sK"},UserCommand,'l') > -1 )
             {
-                cout << "insert content : "; 
+                int UserInput;
+                cout << fowo.cOwOut.ConsoleQuick("prompt","set Kick Point :");
+                cin >> UserInput;
+
+                if      (UserCommand == "R1.sK"){R1.KickPoint = UserInput;}
+                else if (UserCommand == "R2.sK"){R2.KickPoint = UserInput;}
+                else if (UserCommand == "R3.sK"){R3.KickPoint = UserInput;}
+                else if (UserCommand == "R4.sK"){R4.KickPoint = UserInput;}
+            }
+            else if ( UserCommand == "P1.sR.m" || UserCommand == "P2.sR.m" )
+            {
+                cout << fowo.cOwOut.ConsoleQuick("prompt","insert content : "); 
                 string RSideList; 
                 getline(cin,RSideList);
                 
-                cout << "insert separation charracter"; 
+                cout << fowo.cOwOut.ConsoleQuick("prompt","insert separation charracter"); 
                 string SepaChar;
                 getline(cin,SepaChar);
 
                 if (RSideList.length() > 0 && SepaChar.length() > 0)
                 {
-                    R2.SetRSide(RSideList,SepaChar.at(0));
+                    if      (UserCommand == "P1.sR.m"){P1.SetRSide(RSideList,SepaChar.at(0));}
+                    else if (UserCommand == "P2.sR.m"){P2.SetRSide(RSideList,SepaChar.at(0));}
                 }
-            }
-            else if (UserCommand == "R3.sR.m")
-            {
-                cout << "insert content : "; 
-                string RSideList; 
-                getline(cin,RSideList);
-                
-                cout << "insert separation charracter"; 
-                string SepaChar;
-                getline(cin,SepaChar);
 
-                if (RSideList.length() > 0 && SepaChar.length() > 0)
-                {
-                    R3.SetRSide(RSideList,SepaChar.at(0));
-                }
             }
-            else if (UserCommand == "R4.sR.m")
+            else if (UserCommand == "P1.sR.r" || UserCommand == "P2.sR.r")
             {
-                cout << "insert content : "; 
-                string RSideList; 
-                getline(cin,RSideList);
-                
-                cout << "insert separation charracter"; 
-                string SepaChar;
-                getline(cin,SepaChar);
-
-                if (RSideList.length() > 0 && SepaChar.length() > 0)
-                {
-                    R4.SetRSide(RSideList,SepaChar.at(0));
-                }
-            }
-            else if (UserCommand == "R1.sR.r")
-            {
-                cout << "choose mode : card / swap" << endl;
+                cout << fowo.cOwOut.ConsoleQuick("prompt","choose mode : card / swap") << endl;
                 string UserInput = "";
                 getline(cin,UserInput);
 
+                int TempCharracterQty = 0;
+                if      (UserCommand == "P1.sR.r"){ TempCharracterQty = P1.CharracterQty; }
+                else if (UserCommand == "P2.sR.r"){ TempCharracterQty = P2.CharracterQty; }
+
+                vector<int> VekInt = {};
+                bool SafeToContinue = false;
                 if (UserInput == "card")
                 {
-                    vector<int> VekInt = OwOKEUtil_key_gen_card(R1.CharracterQty);
-                    R1.RSide = VekInt;
+                    VekInt = OwOKEUtil_key_gen_card(TempCharracterQty);
+                    SafeToContinue = true;
                 }
                 else if (UserInput == "swap")
                 {
-                    vector<int> VekInt = OwOKEUtil_key_gen_swap(R1.CharracterQty);
-                    R1.RSide = VekInt;
+                    VekInt = OwOKEUtil_key_gen_swap(TempCharracterQty);
+                    SafeToContinue = true;
                 }
                 else
                 {
-                    cout << "QAQKE : invalid choice" << endl;
+                    cout << fowo.cOwOut.ConsoleQuick("error","invalid choice") << endl;
+                    SafeToContinue = false;
                 }
-            }
-            else if (UserCommand == "R2.sR.r")
-            {
-                cout << "choose mode : card / swap" << endl;
-                string UserInput = "";
-                getline(cin,UserInput);
 
-                if (UserInput == "card")
+                if (SafeToContinue)
                 {
-                    vector<int> VekInt = OwOKEUtil_key_gen_card(R2.CharracterQty);
-                    R2.RSide = VekInt;
-                }
-                else if (UserInput == "swap")
-                {
-                    vector<int> VekInt = OwOKEUtil_key_gen_swap(R2.CharracterQty);
-                    R2.RSide = VekInt;
-                }
-                else
-                {
-                    cout << "QAQKE : invalid choice" << endl;
+                    if      (UserCommand == "P1.sR.r"){P1.RSide = VekInt;}
+                    else if (UserCommand == "P2.sR.r"){P2.RSide = VekInt;}
                 }
             }
-            else if (UserCommand == "R3.sR.r")
+            else if (fowo.vectOwOr.FindObjPos({"R1.r","R2.r","R3.r","R4.r"},UserCommand,'l') > -1 )
             {
-                cout << "choose mode : card / swap" << endl;
-                string UserInput = "";
-                getline(cin,UserInput);
+                string TempName = "";
+                if      (UserCommand == "R1.r"){TempName = "R1";}
+                else if (UserCommand == "R2.r"){TempName = "R2";}
+                else if (UserCommand == "R3.r"){TempName = "R3";}
+                else if (UserCommand == "R4.r"){TempName = "R4";}
 
-                if (UserInput == "card")
-                {
-                    vector<int> VekInt = OwOKEUtil_key_gen_card(R3.CharracterQty);
-                    R3.RSide = VekInt;
-                }
-                else if (UserInput == "swap")
-                {
-                    vector<int> VekInt = OwOKEUtil_key_gen_swap(R3.CharracterQty);
-                    R3.RSide = VekInt;
-                }
-                else
-                {
-                    cout << "QAQKE : invalid choice" << endl;
-                }
-            }
-            else if (UserCommand == "R4.sR.r")
-            {
-                cout << "choose mode : card / swap" << endl;
-                string UserInput = "";
-                getline(cin,UserInput);
+                int UserInput;
+                cout << fowo.cOwOut.ConsoleQuick("prompt","rotate rotor " + TempName + " by units : ");
+                cin >> UserInput;
 
-                if (UserInput == "card")
-                {
-                    vector<int> VekInt = OwOKEUtil_key_gen_card(R4.CharracterQty);
-                    R4.RSide = VekInt;
-                }
-                else if (UserInput == "swap")
-                {
-                    vector<int> VekInt = OwOKEUtil_key_gen_swap(R4.CharracterQty);
-                    R4.RSide = VekInt;
-                }
-                else
-                {
-                    cout << "QAQKE : invalid choice" << endl;
-                }
-            }
-            else if (UserCommand == "R1.sK")
-            {
-                int UserInput;
-                cin >> UserInput;
-                R1.KickPoint = UserInput;
-            }
-            else if (UserCommand == "R2.sK")
-            {
-                int UserInput;
-                cin >> UserInput;
-                R2.KickPoint = UserInput;
-            }
-            else if (UserCommand == "R3.sK")
-            {
-                int UserInput;
-                cin >> UserInput;
-                R3.KickPoint = UserInput;
-            }
-            else if (UserCommand == "R4.sK")
-            {
-                int UserInput;
-                cin >> UserInput;
-                R4.KickPoint = UserInput;
-            }
-            else if (UserCommand == "P1.sR.m")
-            {
-                cout << "insert content : "; 
-                string RSideList; 
-                getline(cin,RSideList);
-                
-                cout << "insert separation charracter"; 
-                string SepaChar;
-                getline(cin,SepaChar);
-
-                if (RSideList.length() > 0 && SepaChar.length() > 0)
-                {
-                    P1.SetRSide(RSideList,SepaChar.at(0));
-                }
-            }
-            else if (UserCommand == "P2.sR.m")
-            {
-                cout << "insert content : "; 
-                string RSideList; 
-                getline(cin,RSideList);
-                
-                cout << "insert separation charracter"; 
-                string SepaChar;
-                getline(cin,SepaChar);
-
-                if (RSideList.length() > 0 && SepaChar.length() > 0)
-                {
-                    P2.SetRSide(RSideList,SepaChar.at(0));
-                }
-            }
-            else if (UserCommand == "P1.sR.r")
-            {
-                cout << "choose mode : card / swap" << endl;
-                string UserInput = "";
-                getline(cin,UserInput);
-
-                if (UserInput == "card")
-                {
-                    vector<int> VekInt = OwOKEUtil_key_gen_card(P1.CharracterQty);
-                    P1.RSide = VekInt;
-                }
-                else if (UserInput == "swap")
-                {
-                    vector<int> VekInt = OwOKEUtil_key_gen_swap(P1.CharracterQty);
-                    P1.RSide = VekInt;
-                }
-                else
-                {
-                    cout << "QAQKE : invalid choice" << endl;
-                }
-            }
-            else if (UserCommand == "P2.sR.r")
-            {
-                cout << "choose mode : card / swap" << endl;
-                string UserInput = "";
-                getline(cin,UserInput);
-
-                if (UserInput == "card")
-                {
-                    vector<int> VekInt = OwOKEUtil_key_gen_card(P2.CharracterQty);
-                    P2.RSide = VekInt;
-                }
-                else if (UserInput == "swap")
-                {
-                    vector<int> VekInt = OwOKEUtil_key_gen_swap(P2.CharracterQty);
-                    P2.RSide = VekInt;
-                }
-                else
-                {
-                    cout << "QAQKE : invalid choice" << endl;
-                }
-            }
-            else if (UserCommand == "R1.r")
-            {
-                int UserInput;
-                cout << "rotate rotor R1 by units : ";
-                cin >> UserInput;
-                R1.Rotate(UserInput);
-            }
-            else if (UserCommand == "R2.r")
-            {
-                int UserInput;
-                cout << "rotate rotor R2 by units : ";
-                cin >> UserInput;
-                R2.Rotate(UserInput);
-            }
-            else if (UserCommand == "R3.r")
-            {
-                int UserInput;
-                cout << "rotate rotor R3 by units : ";
-                cin >> UserInput;
-                R3.Rotate(UserInput);
-            }
-            else if (UserCommand == "R4.r")
-            {
-                int UserInput;
-                cout << "rotate rotor R4 by units : ";
-                cin >> UserInput;
-                R4.Rotate(UserInput);
+                if      (UserCommand == "R1.r"){R1.Rotate_ByAmount(UserInput);}
+                else if (UserCommand == "R2.r"){R2.Rotate_ByAmount(UserInput);}
+                else if (UserCommand == "R3.r"){R3.Rotate_ByAmount(UserInput);}
+                else if (UserCommand == "R4.r"){R4.Rotate_ByAmount(UserInput);}
             }
             else if (UserCommand == "RA.sP")
             {
-                cout << "R1 pos ? : ";
+                cout << fowo.cOwOut.ConsoleQuick("prompt","R1 pos ? : ");
                 cin >> R1pos;
-                cout << "R2 pos ? : ";
+                cout << fowo.cOwOut.ConsoleQuick("prompt","R2 pos ? : ");
                 cin >> R2pos;
-                cout << "R3 pos ? : ";
+                cout << fowo.cOwOut.ConsoleQuick("prompt","R3 pos ? : ");
                 cin >> R3pos;
-                cout << "R4 pos ? : ";
+                cout << fowo.cOwOut.ConsoleQuick("prompt","R4 pos ? : ");
                 cin >> R4pos;
                 cin.ignore();
 
@@ -490,40 +369,47 @@ int main ()
                 R3.SetPosition(R3pos);
                 R4.SetPosition(R4pos);
             }
-            else if (UserCommand == "KL.p")
+            else if (fowo.vectOwOr.FindObjPos({"KL.p","R1.p","R2.p","R3.p","R4.p","RA.p","P1.p","P2.p"},UserCommand,'l') > -1)
             {
-                cout << KL.PrintContent() << endl;
-            }
-            else if (UserCommand == "R1.p")
-            {
-                cout << R1.PrintContent() << endl;
-            }
-            else if (UserCommand == "R2.p")
-            {
-                cout << R2.PrintContent() << endl;
-            }
-            else if (UserCommand == "R3.p")
-            {
-                cout << R3.PrintContent() << endl;
-            }
-            else if (UserCommand == "R4.p")
-            {
-                cout << R4.PrintContent() << endl;
-            }
-            else if (UserCommand == "RA.p")
-            {
-                cout <<"R1pos : ("<< setfill('0') << setw(2) << right << R1.GetPosition() << ") : " << R1.PrintContentR() << endl;
-                cout <<"R2pos : ("<< setfill('0') << setw(2) << right << R2.GetPosition() << ") : " << R2.PrintContentR() << endl;
-                cout <<"R3pos : ("<< setfill('0') << setw(2) << right << R3.GetPosition() << ") : " << R3.PrintContentR() << endl;
-                cout <<"R4pos : ("<< setfill('0') << setw(2) << right << R4.GetPosition() << ") : " << R4.PrintContentR() << endl;
-            }
-            else if (UserCommand == "P1.p")
-            {
-                cout << P1.PrintContent() << endl;
-            }
-            else if (UserCommand == "P2.p")
-            {
-                cout << P2.PrintContent() << endl;
+                cout << fowo.strOwOng.shOwOrthand.ColorText("g");
+                
+                if (UserCommand == "KL.p")
+                {
+                    cout << KL.PrintContent() << endl;
+                }
+                else if (UserCommand == "R1.p")
+                {
+                    cout << R1.PrintContent() << endl;
+                }
+                else if (UserCommand == "R2.p")
+                {
+                    cout << R2.PrintContent() << endl;
+                }
+                else if (UserCommand == "R3.p")
+                {
+                    cout << R3.PrintContent() << endl;
+                }
+                else if (UserCommand == "R4.p")
+                {
+                    cout << R4.PrintContent() << endl;
+                }
+                else if (UserCommand == "RA.p")
+                {
+                    cout <<"R1pos : ("<< setfill('0') << setw(2) << right << R1.GetPosition() << ") : " << R1.PrintContentR() << endl;
+                    cout <<"R2pos : ("<< setfill('0') << setw(2) << right << R2.GetPosition() << ") : " << R2.PrintContentR() << endl;
+                    cout <<"R3pos : ("<< setfill('0') << setw(2) << right << R3.GetPosition() << ") : " << R3.PrintContentR() << endl;
+                    cout <<"R4pos : ("<< setfill('0') << setw(2) << right << R4.GetPosition() << ") : " << R4.PrintContentR() << endl;
+                }
+                else if (UserCommand == "P1.p")
+                {
+                    cout << P1.PrintContent() << endl;
+                }
+                else if (UserCommand == "P2.p")
+                {
+                    cout << P2.PrintContent() << endl;
+                }
+
+                cout << fowo.strOwOng.shOwOrthand.ColorText("d");
             }
             else if (UserCommand == "key.print")
             {
@@ -537,6 +423,7 @@ int main ()
                 R3.SetPosition(0);
                 R4.SetPosition(0);
 
+                cout << fowo.strOwOng.shOwOrthand.ColorText("g");
                 cout << "Machine Settings : " << endl;
                 cout << endl;
                 cout << "Keyboard : " << endl;
@@ -554,6 +441,7 @@ int main ()
                 cout << "Plugboard 2 : " << endl;
                 cout << P2.PrintContentR() << endl;
                 cout << endl;
+                cout << fowo.strOwOng.shOwOrthand.ColorText("d");
 
                 R1.SetPosition(TempR1pos);
                 R2.SetPosition(TempR2pos);
@@ -572,7 +460,7 @@ int main ()
 
                 Ans.pop_back();
 
-                cout << Ans << endl;
+                cout << fowo.strOwOng.shOwOrthand.ColorText("g") << Ans << fowo.strOwOng.shOwOrthand.ColorText("d") << endl;
             }
             else if (UserCommand == "key.gen.card")
             {
@@ -586,7 +474,7 @@ int main ()
 
                 Ans.pop_back();
 
-                cout << Ans << endl;
+                cout << fowo.strOwOng.shOwOrthand.ColorText("g") << Ans << fowo.strOwOng.shOwOrthand.ColorText("d") << endl;
             }
             else if (UserCommand == "enc.c")
             {
@@ -612,24 +500,15 @@ int main ()
 
                             C1 = KL.SignalItoL(N7);
 
+                            cout << fowo.strOwOng.shOwOrthand.ColorText("g");
                             printEnc(R1.GetPosition(), R2.GetPosition(), R3.GetPosition(), R4.GetPosition(), C0, N1, N2, N3, N4, N5, N6, N7, C1);
-
+                            cout << fowo.strOwOng.shOwOrthand.ColorText("d");
                             //kick the rotors
 
-                            bool needkick3 = R4.Rotate(1);
-                            if(needkick3)
-                            {
-                                bool needkick2 = R3.Rotate(1);
-                                if(needkick2)
-                                {
-                                    bool needkick1 = R2.Rotate(1);
-                                    if(needkick1)
-                                    {
-                                        R1.Rotate(1);
-                                    }
-                                }
-                            }
-
+                            int needToKickR3 = R4.Rotate_ByAmount(1);
+                            int needToKickR2 = R3.Rotate_ByAmount(needToKickR3);
+                            int needToKickR1 = R2.Rotate_ByAmount(needToKickR2);
+                            R1.Rotate_ByAmount(needToKickR1);
 
                         }
 
@@ -649,7 +528,7 @@ int main ()
                 {
                     string UserInput = "";
                     string OutputString = "";
-                    cout << "insert plaintext : ";
+                    cout << fowo.cOwOut.ConsoleQuick("prompt","insert plaintext : ");
                     getline(cin,UserInput);
 
                     for(int i = 0 ; i < UserInput.length() ; i++)
@@ -666,31 +545,26 @@ int main ()
 
                         C1 = KL.SignalItoL(N7);
                         
+                        cout << fowo.strOwOng.shOwOrthand.ColorText("g");
                         printEnc(R1.GetPosition(), R2.GetPosition(), R3.GetPosition(), R4.GetPosition(), C0, N1, N2, N3, N4, N5, N6, N7, C1);
+                        cout << fowo.strOwOng.shOwOrthand.ColorText("d");
+
                         OutputString.push_back(C1);
 
                         //kick the rotors
+                        int needToKickR3 = R4.Rotate_ByAmount(1);
+                        int needToKickR2 = R3.Rotate_ByAmount(needToKickR3);
+                        int needToKickR1 = R2.Rotate_ByAmount(needToKickR2);
+                        R1.Rotate_ByAmount(needToKickR1);
 
-                        bool needkick3 = R4.Rotate(1);
-                        if(needkick3)
-                        {
-                            bool needkick2 = R3.Rotate(1);
-                            if(needkick2)
-                            {
-                                bool needkick1 = R2.Rotate(1);
-                                if(needkick1)
-                                {
-                                    R1.Rotate(1);
-                                }
-                            }
-                        }
+
                     }
-
-                    cout << "output ciphertext : " << OutputString << endl;
+                    
+                    cout << fowo.strOwOng.shOwOrthand.ColorText("g") << "output ciphertext : " << OutputString << fowo.strOwOng.shOwOrthand.ColorText("d") << endl;
                 }
                 else
                 {
-                    cout << "KEQAQ : Charracter Quantities between KeyBoard/LampBoard and Rotors and Plugboard do not match, will not encrypt" << endl;
+                    cout << fowo.cOwOut.ConsoleQuick("error","Charracter Quantities between KeyBoard/LampBoard and Rotors and Plugboard do not match, will not encrypt") << endl;
                 }   
             }
             else if (UserCommand == "dec.c")
@@ -715,22 +589,15 @@ int main ()
                             N1 = P1.SignalRtoL(N2);
                             C0 = KL.SignalItoK(N1);
 
+                            cout << fowo.strOwOng.shOwOrthand.ColorText("g");
                             printDec(R1.GetPosition(), R2.GetPosition(), R3.GetPosition(), R4.GetPosition(), C0, N1, N2, N3, N4, N5, N6, N7, C1);
+                            cout << fowo.strOwOng.shOwOrthand.ColorText("d");
 
                             //kick the rotors
-                            bool needkick3 = R4.Rotate(1);
-                            if(needkick3)
-                            {
-                                bool needkick2 = R3.Rotate(1);
-                                if(needkick2)
-                                {
-                                    bool needkick1 = R2.Rotate(1);
-                                    if(needkick1)
-                                    {
-                                        R1.Rotate(1);
-                                    }
-                                }
-                            }
+                            int needToKickR3 = R4.Rotate_ByAmount(1);
+                            int needToKickR2 = R3.Rotate_ByAmount(needToKickR3);
+                            int needToKickR1 = R2.Rotate_ByAmount(needToKickR2);
+                            R1.Rotate_ByAmount(needToKickR1);
                         }
 
                         
@@ -739,7 +606,7 @@ int main ()
                 }
                 else
                 {
-                    cout << "KEQAQ : Charracter Quantities between KeyBoard/LampBoard and Rotors and Plugboard do not match, will not decrypt" << endl;
+                    cout << fowo.cOwOut.ConsoleQuick("error","Charracter Quantities between KeyBoard/LampBoard and Rotors and Plugboard do not match, will not decrypt") << endl;
                 }
 
                 
@@ -751,7 +618,7 @@ int main ()
                 {
                     string UserInput = "";
                     string OutputString = "";
-                    cout << "insert ciphertext : ";
+                    cout << fowo.cOwOut.ConsoleQuick("prompt","insert ciphertext : ");
                     getline(cin,UserInput);
 
                     for(int i = 0 ; i < UserInput.length() ; i++)
@@ -767,37 +634,34 @@ int main ()
                         N1 = P1.SignalRtoL(N2);
                         C0 = KL.SignalItoK(N1);
 
+                        cout << fowo.strOwOng.shOwOrthand.ColorText("g");
                         printDec(R1.GetPosition(), R2.GetPosition(), R3.GetPosition(), R4.GetPosition(), C0, N1, N2, N3, N4, N5, N6, N7, C1);
+                        cout << fowo.strOwOng.shOwOrthand.ColorText("d");
+
                         OutputString.push_back(C0);
 
                         //kick the rotors
 
-                        bool needkick3 = R4.Rotate(1);
-                        if(needkick3)
-                        {
-                            bool needkick2 = R3.Rotate(1);
-                            if(needkick2)
-                            {
-                                bool needkick1 = R2.Rotate(1);
-                                if(needkick1)
-                                {
-                                    R1.Rotate(1);
-                                }
-                            }
-                        }
+                        int needToKickR3 = R4.Rotate_ByAmount(1);
+                        int needToKickR2 = R3.Rotate_ByAmount(needToKickR3);
+                        int needToKickR1 = R2.Rotate_ByAmount(needToKickR2);
+                        R1.Rotate_ByAmount(needToKickR1);
                     }
 
+                    cout << fowo.strOwOng.shOwOrthand.ColorText("g");
                     cout << "output plaintext : " << OutputString << endl;
+                    cout << fowo.strOwOng.shOwOrthand.ColorText("d");
                 }
                 else
                 {
-                    cout << "KEQAQ : Charracter Quantities between KeyBoard/LampBoard and Rotors and Plugboard do not match, will not decrypt" << endl;
+                    cout << fowo.cOwOut.ConsoleQuick("error","Charracter Quantities between KeyBoard/LampBoard and Rotors and Plugboard do not match, will not decrypt") << endl;
                 }
 
                 
             }
             else if (UserCommand == "ld.64")
             {
+                cout << fowo.strOwOng.shOwOrthand.ColorText("g");
                 cout << "here are some string contents : " << endl;
                 cout << "63,62,61,60,59,58,57,56,55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0 //reverse" << endl << endl;
                 cout << "0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,63,61,59,57,55,53,51,49,47,45,43,41,39,37,35,33,31,29,27,25,23,21,19,17,15,13,11,9,7,5,3,1 //jump hill" << endl << endl;
@@ -805,10 +669,11 @@ int main ()
                 cout << "0,63,1,62,2,61,3,60,4,59,5,58,6,57,7,56,8,55,9,54,10,53,11,52,12,51,13,50,14,49,15,48,16,47,17,46,18,45,19,44,20,43,21,42,22,41,23,40,24,39,25,38,26,37,27,36,28,35,29,34,30,33,31,32 //comb reverse" << endl << endl;
                 cout << "0,1,2,4,8,16,32,3,9,27,5,25,7,49,11,13,17,19,23,29,31,37,41,43,47,53,59,61,6,10,12,14,15,18,20,21,22,24,26,28,30,33,34,35,36,38,39,40,42,44,45,46,48,50,51,52,54,55,56,57,58,60,62,63 //prime group" << endl << endl;
                 cout << "0,1,59,2,61,11,3,40,15,36,4,24,18,27,58,5,51,53,50,45,12,6,63,62,52,39,37,26,7,16,48,32,21,31,47,13,8,23,19,33,30,56,54,55,34,9,29,49,25,17,42,14,43,46,41,10,35,28,57,38,60,22,20,44 //space jump" << endl << endl;
-
+                cout << fowo.strOwOng.shOwOrthand.ColorText("d");
             }
             else if (UserCommand == "ld.ch")
             {
+                cout << fowo.strOwOng.shOwOrthand.ColorText("g");
                 cout << "here are some of the character sets : " << endl;
 
                 cout << "English - Normal" << endl;
@@ -837,6 +702,8 @@ int main ()
 
                 cout << "Astralica" << endl;
                 cout << "a æ e i y ī ï o u w ü ə ô ʔ m b p f v z c s j q x n l d t ŋ g k h r . , ? ! : \" 0 1 2 3 4 5 6 7 8 9 A B C D E F + - * / ( ) = _ " <<  endl;
+            
+                cout << fowo.strOwOng.shOwOrthand.ColorText("d");
             }
             else if (UserCommand == "clear")
             {
@@ -849,7 +716,7 @@ int main ()
                 #endif
             }
 
-            cout << "\033[34m" << ">" << "\033[0m";
+            
         }
     }
 

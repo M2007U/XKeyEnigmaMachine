@@ -11,7 +11,7 @@
 #include <cctype>
 #include <random>
 
-#include "FOwOFunctions_CPP-package_2024.h"
+#include "FOwOFunctions_2024.cpp"
 
 using namespace std;
 
@@ -69,7 +69,9 @@ vector<int> OwOKEUtil_key_gen_card(int chQty)
             }
         }
 
-        VektorInt = FOwO_vector_concat_bin(VektorDeckA,VektorDeckB);
+        FOwO fowo;
+
+        VektorInt = fowo.vectOwOr.concat_bin(VektorDeckA,VektorDeckB);
         VektorDeckA = {};
         VektorDeckB = {};
     }

@@ -10,11 +10,13 @@
 #include <cstring>
 #include <cctype>
 
-#include "FOwOFunctions_CPP-package_2024.h"
+#include "FOwOFunctions_2024.cpp"
 
 class KEOwO_Rotor
 {
     public:
+
+    FOwO fowo;
 
     int CharracterQty = 64;
     vector<int> LSide; //orderred number list
@@ -26,9 +28,15 @@ class KEOwO_Rotor
     KEOwO_Rotor(int User_CharracterQty, string User_RotorName)
     {
         RotorName = User_RotorName;
+        ChangeCharracterQty(User_CharracterQty);
+    }
 
-        CharracterQty = User_CharracterQty;
+    void ChangeCharracterQty(int InAmount)
+    {
+        CharracterQty = InAmount;
         KickPoint = CharracterQty - 1;
+        LSide = {};
+        RSide = {};
         for(int i = 0 ; i < CharracterQty ; i++ )
         {
             LSide.push_back(i);
@@ -61,30 +69,54 @@ class KEOwO_Rotor
         return AnswerR;
     }
 
-    bool Rotate (int amount)
+    int Rotate_ByAmount (int amount)
     {
-        //rotates the rotor, if it will kick another rotor because of the kick point, then return true, else false
+        //rotates the rotor,
+        //if it will kick another rotor because of the kick point,
+        //if kick forward, return +1
+        //if kick backward, return -1
+        //else 0
 
-        bool needToKick = false;
+        int needToKick = 0;
 
-        if (LSide[0] == KickPoint)
+        for(int i = 0 ; i < amount ; i++)
         {
-            needToKick = true;
-        }
+            //do this amount of times
 
-        if (amount < 0)
-        {
-            LSide = FOwO_vector_cycleBelt(LSide,'l',amount);
-            RSide = FOwO_vector_cycleBelt(RSide,'l',amount);
-        }
-        else if (amount > 0)
-        {
-            LSide = FOwO_vector_cycleBelt(LSide,'r',amount);
-            RSide = FOwO_vector_cycleBelt(RSide,'r',amount);
+            //do we need to kick ?
+            if (LSide[0] == KickPoint)
+            {
+                if (amount < 0)
+                {
+                    needToKick = -1;
+                }
+                else if (amount > 0)
+                {
+                    needToKick = 1;
+                }
+            }
+
+            if (amount < 0){ Rotate_ByOne(-1);}
+            else if (amount > 0){ Rotate_ByOne(1); }
         }
 
         return needToKick;
     }
+
+    void Rotate_ByOne(int Direction)
+    {
+        if (Direction == 1)
+        {
+            LSide = fowo.vectOwOr.cycleBelt(LSide,1);
+            RSide = fowo.vectOwOr.cycleBelt(RSide,1);
+        }
+        else if (Direction == -1)
+        {
+            LSide = fowo.vectOwOr.cycleBelt(LSide, LSide.size()-2);
+            RSide = fowo.vectOwOr.cycleBelt(RSide, RSide.size()-2);
+        }
+    }
+
 
     int GetPosition ()
     {
@@ -116,7 +148,13 @@ class KEOwO_Rotor
         {
             //found it
             //now curr will have the position of the target
-            Rotate(curr);
+
+            //       V
+            // 5 6 7 8 9 0 1 2 3 4
+            // 1 3 5 7 9 2 4 6 8 0
+
+            Rotate_ByAmount(curr);
+
         }
         else
         {
@@ -132,7 +170,7 @@ class KEOwO_Rotor
     void SetRSide (string Blob, char SeparateChar)
     {
         //Blob is going to be a comma separeted list
-        if(FOwO_string_isNaughtyEmpty(Blob))
+        if( fowo.strOwOng.dOwOtect.isNaughtyEmpty(Blob) )
         {
             cout << "KEOwO_Rotor : " + RotorName + " : SetRSide : List contains white space, will not procede" << endl; 
         }
@@ -140,7 +178,7 @@ class KEOwO_Rotor
         {
             //"1,2,3,4,5,6,7,8"
             //turn given string from User into a vector of strings
-            vector<string> RSideList = FOwO_string_SeparateByChar(Blob,SeparateChar);
+            vector<string> RSideList = fowo.strOwOng.mOwOnip.SeparateByChar(Blob,SeparateChar);
 
             //check if size of vector is the same as CharracterQty
             if(RSideList.size() != CharracterQty)

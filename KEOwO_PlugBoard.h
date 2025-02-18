@@ -10,11 +10,13 @@
 #include <cstring>
 #include <cctype>
 
-#include "FOwOFunctions_CPP-package_2024.h"
+#include "FOwOFunctions_2024.cpp"
 
 class KEOwO_Plugboard
 {
     public:
+
+    FOwO fowo;
 
     int CharracterQty = 64;
     vector<int> LSide; //orderred number list
@@ -26,13 +28,7 @@ class KEOwO_Plugboard
     KEOwO_Plugboard(int User_CharracterQty, string User_PlugBoardName)
     {
         PlugBoardName = User_PlugBoardName;
-
-        CharracterQty = User_CharracterQty;
-        for(int i = 0 ; i < CharracterQty ; i++ )
-        {
-            LSide.push_back(i);
-            RSide.push_back(i);
-        }
+        ChangeCharracterQty(User_CharracterQty);
     }
 
     string PrintContent ()
@@ -62,10 +58,22 @@ class KEOwO_Plugboard
 
     
 
+    void ChangeCharracterQty(int InAmount)
+    {
+        CharracterQty = InAmount;
+        LSide = {};
+        RSide = {};
+        for(int i = 0 ; i < CharracterQty ; i++ )
+        {
+            LSide.push_back(i);
+            RSide.push_back(i);
+        }
+    }
+
     void SetRSide (string Blob, char SeparateChar)
     {
         //Blob is going to be a comma separeted list
-        if(FOwO_string_isNaughtyEmpty(Blob))
+        if(fowo.strOwOng.dOwOtect.isNaughtyEmpty(Blob))
         {
             cout << "KEOwO_Plugboard : " + PlugBoardName + " : SetRSide : List contains white space, will not procede" << endl; 
         }
@@ -73,7 +81,7 @@ class KEOwO_Plugboard
         {
             //"1,2,3,4,5,6,7,8"
             //turn given string from User into a vector of strings
-            vector<string> RSideList = FOwO_string_SeparateByChar(Blob,SeparateChar);
+            vector<string> RSideList = fowo.strOwOng.mOwOnip.SeparateByChar(Blob,SeparateChar);
 
             //check if size of vector is the same as CharracterQty
             if(RSideList.size() != CharracterQty)
